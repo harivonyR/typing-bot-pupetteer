@@ -17,7 +17,7 @@ const puppeteer = require('puppeteer');
             .then(()=>console.log("[👍] Page OK"))
             .catch((e)=>console.log('!!! Goto Fail page'))
         
-        // Wait for selector
+    // Wait for selector
     await page.waitForSelector('button.js-continue-button',{timeout: 5000})
         .then(async()=>{
             await page.click('button.js-continue-button')
