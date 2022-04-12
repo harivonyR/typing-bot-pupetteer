@@ -30,27 +30,22 @@ const puppeteer = require('puppeteer');
         let rows = await page.evaluate(
                 ()=> Array.from(window.document.querySelectorAll('.letter'))
                         .map((row)=>{
-                        return row.innerText
+                            return row.innerHTML
+                        
                     }).join('')
         )
         
+        rows = rows.split(';')
+        rows = rows.join(' ')
+        rows = rows.split('&nbsp')
+        rows = rows.join('')
+        console.log('rows')
     // Filter data
+        
         console.log("Total file scraped "+rows.length)
         console.log(rows);
+        
+        await page.type('.letter',rows,{delay:1.5})
     
-    await page.type(".letter",rows,{delay :30})
-        /*
-    (async()=>{
-        for(let i=0;i<rows.length;i++){
-            if(rows[i]==" "){
-                await  page.keyboard.press("Space")
-            }
-            else{
-                await  page.keyboard.press(rows[i])
-            }
-            
-        }
-    })()
-    */
 })()
 
